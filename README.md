@@ -4,6 +4,20 @@
 
 This project implements an end-to-end image captioning system that automatically generates natural language descriptions for images. The model combines a convolutional neural network encoder for visual feature extraction with a recurrent neural network decoder for sequential text generation. The system is trained on the Flickr8k dataset and evaluated using the BLEU metric.
 
+## CV / Resume Bullet Points
+
+> **XYZ format** — *Accomplished [X], as measured by [Y], by doing [Z]*
+
+- Developed an end-to-end image captioning system that generates natural language descriptions for unseen images—achieving competitive BLEU-4 scores on the Flickr8k benchmark (8,000 images, 40,000 human captions)—by designing an encoder-decoder architecture that pairs a frozen, pretrained EfficientNet-B2 backbone with an LSTM decoder, replacing legacy VGG models to reduce FLOPs while improving ImageNet-level feature quality.
+
+- Reduced model overfitting and improved generalization on a moderate-sized dataset—validated by stable cross-entropy loss curves across 20 training epochs—by implementing a stratified 80/10/10 image-level data split with teacher-forcing LSTM training, a custom PyTorch packed-sequence batch collator, and a regularization strategy combining 50% dropout, weight decay, and gradient clipping.
+
+- Improved caption quality beyond greedy decoding—measured by higher corpus-level BLEU-4 scores computed with NLTK on held-out validation images—by implementing a beam search inference algorithm (beam width k = 5) that maintains the top-k candidate sequences at each autoregressive decoding step using cumulative log-probability scoring.
+
+- Delivered a fully reproducible, GPU-accelerated deep learning pipeline on Google Colab—evidenced by a serialised model checkpoint (`final_model.pth.tar`) that restores model weights, optimiser state, configuration, and vocabulary—by orchestrating the complete ML lifecycle: data preprocessing with augmentation (colour jitter, random horizontal flips), Adam optimisation, epoch checkpointing every 5 epochs, and BLEU evaluation over 20 epochs (~3 hours on a T4 GPU).
+
+---
+
 ## Architecture
 
 ### High-Level Design
